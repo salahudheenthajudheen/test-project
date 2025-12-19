@@ -29,6 +29,7 @@
                 <a href="#" onclick="showScreen('landing')">Home</a>
                 <a href="#" onclick="showScreen('chat')">Order Now</a>
                 <a href="#" onclick="showScreen('dashboard')">Seller Dashboard</a>
+                <a href="#" onclick="showScreen('fleet')">Fleet</a>
             </div>
             <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
                 <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -58,6 +59,7 @@
             <a href="#" onclick="showScreen('landing'); toggleMobileMenu()">Home</a>
             <a href="#" onclick="showScreen('chat'); toggleMobileMenu()">Order Now</a>
             <a href="#" onclick="showScreen('dashboard'); toggleMobileMenu()">Seller Dashboard</a>
+            <a href="#" onclick="showScreen('fleet'); toggleMobileMenu()">Fleet</a>
         </div>
     </nav>
 
@@ -628,6 +630,457 @@
                                     Delivered
                                 </span>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fleet Management -->
+    <section id="fleet" class="screen">
+        <div class="fleet-container">
+            <div class="fleet-header">
+                <div>
+                    <h1>Fleet Management</h1>
+                    <p>Track and manage your delivery fleet</p>
+                </div>
+                <div class="fleet-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon active-drivers">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                                <circle cx="9" cy="7" r="4" />
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                            </svg>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-value">8</span>
+                            <span class="stat-label">Active Drivers</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon in-transit">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="1" y="3" width="15" height="13" />
+                                <polygon points="16 8 20 8 23 11 23 16 16 16 16 8" />
+                                <circle cx="5.5" cy="18.5" r="2.5" />
+                                <circle cx="18.5" cy="18.5" r="2.5" />
+                            </svg>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-value">5</span>
+                            <span class="stat-label">In Transit</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon completed-today">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-value">23</span>
+                            <span class="stat-label">Delivered Today</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon avg-time">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10" />
+                                <polyline points="12 6 12 12 16 14" />
+                            </svg>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-value">24m</span>
+                            <span class="stat-label">Avg. Delivery</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fleet-grid">
+                <!-- Map Placeholder -->
+                <div class="fleet-map">
+                    <div class="map-header">
+                        <h3>Live Tracking</h3>
+                        <span class="live-badge">
+                            <span class="pulse"></span>
+                            Live
+                        </span>
+                    </div>
+                    <div class="map-placeholder">
+                        <div class="map-overlay">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                                <circle cx="12" cy="10" r="3" />
+                            </svg>
+                            <p>Interactive map would display here</p>
+                            <span>Showing 5 active deliveries</span>
+                        </div>
+                        <!-- Simulated map markers -->
+                        <div class="map-marker" style="top: 25%; left: 30%;">
+                            <div class="marker-dot"></div>
+                            <div class="marker-pulse"></div>
+                        </div>
+                        <div class="map-marker" style="top: 45%; left: 55%;">
+                            <div class="marker-dot"></div>
+                            <div class="marker-pulse"></div>
+                        </div>
+                        <div class="map-marker" style="top: 60%; left: 35%;">
+                            <div class="marker-dot"></div>
+                            <div class="marker-pulse"></div>
+                        </div>
+                        <div class="map-marker" style="top: 35%; left: 70%;">
+                            <div class="marker-dot"></div>
+                            <div class="marker-pulse"></div>
+                        </div>
+                        <div class="map-marker" style="top: 70%; left: 65%;">
+                            <div class="marker-dot"></div>
+                            <div class="marker-pulse"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Drivers List -->
+                <div class="drivers-panel">
+                    <div class="panel-header">
+                        <h3>Drivers</h3>
+                        <div class="filter-tabs">
+                            <button class="filter-tab active" onclick="filterDrivers('all', this)">All</button>
+                            <button class="filter-tab" onclick="filterDrivers('active', this)">Active</button>
+                            <button class="filter-tab" onclick="filterDrivers('idle', this)">Idle</button>
+                        </div>
+                    </div>
+                    <div class="drivers-list" id="driversList">
+                        <div class="driver-card" data-status="active">
+                            <div class="driver-avatar">
+                                <span>RK</span>
+                                <span class="driver-status online"></span>
+                            </div>
+                            <div class="driver-info">
+                                <span class="driver-name">Rajesh Kumar</span>
+                                <span class="driver-detail">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                                        <circle cx="12" cy="10" r="3" />
+                                    </svg>
+                                    Delivering to Koramangala
+                                </span>
+                            </div>
+                            <div class="driver-meta">
+                                <span class="delivery-eta">ETA 8 min</span>
+                                <button class="btn-icon-sm" onclick="viewDriverDetails('RK')">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="9 18 15 12 9 6" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="driver-card" data-status="active">
+                            <div class="driver-avatar">
+                                <span>SP</span>
+                                <span class="driver-status online"></span>
+                            </div>
+                            <div class="driver-info">
+                                <span class="driver-name">Suresh Patil</span>
+                                <span class="driver-detail">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                                        <circle cx="12" cy="10" r="3" />
+                                    </svg>
+                                    Delivering to Indiranagar
+                                </span>
+                            </div>
+                            <div class="driver-meta">
+                                <span class="delivery-eta">ETA 12 min</span>
+                                <button class="btn-icon-sm" onclick="viewDriverDetails('SP')">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="9 18 15 12 9 6" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="driver-card" data-status="active">
+                            <div class="driver-avatar">
+                                <span>AM</span>
+                                <span class="driver-status online"></span>
+                            </div>
+                            <div class="driver-info">
+                                <span class="driver-name">Amit Mehta</span>
+                                <span class="driver-detail">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                                        <circle cx="12" cy="10" r="3" />
+                                    </svg>
+                                    Delivering to HSR Layout
+                                </span>
+                            </div>
+                            <div class="driver-meta">
+                                <span class="delivery-eta">ETA 5 min</span>
+                                <button class="btn-icon-sm" onclick="viewDriverDetails('AM')">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="9 18 15 12 9 6" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="driver-card" data-status="idle">
+                            <div class="driver-avatar">
+                                <span>VS</span>
+                                <span class="driver-status idle"></span>
+                            </div>
+                            <div class="driver-info">
+                                <span class="driver-name">Vikram Singh</span>
+                                <span class="driver-detail idle-text">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="12" cy="12" r="10" />
+                                        <polyline points="12 6 12 12 16 14" />
+                                    </svg>
+                                    Available • Last delivery 15 min ago
+                                </span>
+                            </div>
+                            <div class="driver-meta">
+                                <button class="btn btn-assign" onclick="assignDriver('VS')">Assign</button>
+                            </div>
+                        </div>
+
+                        <div class="driver-card" data-status="active">
+                            <div class="driver-avatar">
+                                <span>PJ</span>
+                                <span class="driver-status online"></span>
+                            </div>
+                            <div class="driver-info">
+                                <span class="driver-name">Priya Joshi</span>
+                                <span class="driver-detail">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                                        <circle cx="12" cy="10" r="3" />
+                                    </svg>
+                                    Delivering to Whitefield
+                                </span>
+                            </div>
+                            <div class="driver-meta">
+                                <span class="delivery-eta">ETA 18 min</span>
+                                <button class="btn-icon-sm" onclick="viewDriverDetails('PJ')">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="9 18 15 12 9 6" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="driver-card" data-status="idle">
+                            <div class="driver-avatar">
+                                <span>NK</span>
+                                <span class="driver-status idle"></span>
+                            </div>
+                            <div class="driver-info">
+                                <span class="driver-name">Neha Kapoor</span>
+                                <span class="driver-detail idle-text">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="12" cy="12" r="10" />
+                                        <polyline points="12 6 12 12 16 14" />
+                                    </svg>
+                                    Available • Last delivery 8 min ago
+                                </span>
+                            </div>
+                            <div class="driver-meta">
+                                <button class="btn btn-assign" onclick="assignDriver('NK')">Assign</button>
+                            </div>
+                        </div>
+
+                        <div class="driver-card" data-status="active">
+                            <div class="driver-avatar">
+                                <span>MR</span>
+                                <span class="driver-status online"></span>
+                            </div>
+                            <div class="driver-info">
+                                <span class="driver-name">Mohammed Rafi</span>
+                                <span class="driver-detail">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                                        <circle cx="12" cy="10" r="3" />
+                                    </svg>
+                                    Delivering to JP Nagar
+                                </span>
+                            </div>
+                            <div class="driver-meta">
+                                <span class="delivery-eta">ETA 3 min</span>
+                                <button class="btn-icon-sm" onclick="viewDriverDetails('MR')">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="9 18 15 12 9 6" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="driver-card" data-status="idle">
+                            <div class="driver-avatar">
+                                <span>AR</span>
+                                <span class="driver-status idle"></span>
+                            </div>
+                            <div class="driver-info">
+                                <span class="driver-name">Arun Reddy</span>
+                                <span class="driver-detail idle-text">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="12" cy="12" r="10" />
+                                        <polyline points="12 6 12 12 16 14" />
+                                    </svg>
+                                    Available • Last delivery 22 min ago
+                                </span>
+                            </div>
+                            <div class="driver-meta">
+                                <button class="btn btn-assign" onclick="assignDriver('AR')">Assign</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Active Deliveries Section -->
+            <div class="active-deliveries">
+                <div class="section-header">
+                    <h3>Active Deliveries</h3>
+                    <span class="badge">5 in progress</span>
+                </div>
+                <div class="deliveries-grid">
+                    <div class="delivery-card">
+                        <div class="delivery-header">
+                            <span class="order-id">#VC2847</span>
+                            <span class="delivery-status in-transit">In Transit</span>
+                        </div>
+                        <div class="delivery-route">
+                            <div class="route-point start">
+                                <span class="point-dot"></span>
+                                <span class="point-label">Restaurant</span>
+                            </div>
+                            <div class="route-line">
+                                <div class="route-progress" style="width: 65%;"></div>
+                            </div>
+                            <div class="route-point end">
+                                <span class="point-dot"></span>
+                                <span class="point-label">Koramangala</span>
+                            </div>
+                        </div>
+                        <div class="delivery-footer">
+                            <div class="delivery-driver">
+                                <span class="driver-avatar-sm">RK</span>
+                                <span>Rajesh Kumar</span>
+                            </div>
+                            <span class="delivery-eta-badge">8 min left</span>
+                        </div>
+                    </div>
+
+                    <div class="delivery-card">
+                        <div class="delivery-header">
+                            <span class="order-id">#VC2846</span>
+                            <span class="delivery-status in-transit">In Transit</span>
+                        </div>
+                        <div class="delivery-route">
+                            <div class="route-point start">
+                                <span class="point-dot"></span>
+                                <span class="point-label">Restaurant</span>
+                            </div>
+                            <div class="route-line">
+                                <div class="route-progress" style="width: 40%;"></div>
+                            </div>
+                            <div class="route-point end">
+                                <span class="point-dot"></span>
+                                <span class="point-label">Indiranagar</span>
+                            </div>
+                        </div>
+                        <div class="delivery-footer">
+                            <div class="delivery-driver">
+                                <span class="driver-avatar-sm">SP</span>
+                                <span>Suresh Patil</span>
+                            </div>
+                            <span class="delivery-eta-badge">12 min left</span>
+                        </div>
+                    </div>
+
+                    <div class="delivery-card">
+                        <div class="delivery-header">
+                            <span class="order-id">#VC2845</span>
+                            <span class="delivery-status picked-up">Picked Up</span>
+                        </div>
+                        <div class="delivery-route">
+                            <div class="route-point start">
+                                <span class="point-dot"></span>
+                                <span class="point-label">Restaurant</span>
+                            </div>
+                            <div class="route-line">
+                                <div class="route-progress" style="width: 85%;"></div>
+                            </div>
+                            <div class="route-point end">
+                                <span class="point-dot"></span>
+                                <span class="point-label">HSR Layout</span>
+                            </div>
+                        </div>
+                        <div class="delivery-footer">
+                            <div class="delivery-driver">
+                                <span class="driver-avatar-sm">AM</span>
+                                <span>Amit Mehta</span>
+                            </div>
+                            <span class="delivery-eta-badge arriving">Arriving soon</span>
+                        </div>
+                    </div>
+
+                    <div class="delivery-card">
+                        <div class="delivery-header">
+                            <span class="order-id">#VC2844</span>
+                            <span class="delivery-status in-transit">In Transit</span>
+                        </div>
+                        <div class="delivery-route">
+                            <div class="route-point start">
+                                <span class="point-dot"></span>
+                                <span class="point-label">Restaurant</span>
+                            </div>
+                            <div class="route-line">
+                                <div class="route-progress" style="width: 20%;"></div>
+                            </div>
+                            <div class="route-point end">
+                                <span class="point-dot"></span>
+                                <span class="point-label">Whitefield</span>
+                            </div>
+                        </div>
+                        <div class="delivery-footer">
+                            <div class="delivery-driver">
+                                <span class="driver-avatar-sm">PJ</span>
+                                <span>Priya Joshi</span>
+                            </div>
+                            <span class="delivery-eta-badge">18 min left</span>
+                        </div>
+                    </div>
+
+                    <div class="delivery-card">
+                        <div class="delivery-header">
+                            <span class="order-id">#VC2843</span>
+                            <span class="delivery-status picked-up">Picked Up</span>
+                        </div>
+                        <div class="delivery-route">
+                            <div class="route-point start">
+                                <span class="point-dot"></span>
+                                <span class="point-label">Restaurant</span>
+                            </div>
+                            <div class="route-line">
+                                <div class="route-progress" style="width: 92%;"></div>
+                            </div>
+                            <div class="route-point end">
+                                <span class="point-dot"></span>
+                                <span class="point-label">JP Nagar</span>
+                            </div>
+                        </div>
+                        <div class="delivery-footer">
+                            <div class="delivery-driver">
+                                <span class="driver-avatar-sm">MR</span>
+                                <span>Mohammed Rafi</span>
+                            </div>
+                            <span class="delivery-eta-badge arriving">Arriving soon</span>
                         </div>
                     </div>
                 </div>

@@ -434,6 +434,82 @@ function addDemoOrderMessage() {
 }
 
 // ============================================
+// Fleet Management
+// ============================================
+
+function filterDrivers(filter, btn) {
+    // Update active tab
+    document.querySelectorAll('.filter-tab').forEach(tab => {
+        tab.classList.remove('active');
+    });
+    btn.classList.add('active');
+
+    // Filter drivers
+    const driverCards = document.querySelectorAll('.driver-card');
+    driverCards.forEach(card => {
+        const status = card.dataset.status;
+
+        if (filter === 'all') {
+            card.style.display = 'flex';
+        } else if (filter === 'active' && status === 'active') {
+            card.style.display = 'flex';
+        } else if (filter === 'idle' && status === 'idle') {
+            card.style.display = 'flex';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+}
+
+function viewDriverDetails(driverId) {
+    showToast(`Viewing details for driver ${driverId}`);
+}
+
+function assignDriver(driverId) {
+    showToast(`Assigning delivery to driver ${driverId}...`);
+
+    // Find the driver card and update its status
+    const driverCards = document.querySelectorAll('.driver-card');
+    driverCards.forEach(card => {
+        const avatar = card.querySelector('.driver-avatar span:first-child');
+        if (avatar && avatar.textContent === driverId) {
+            const statusDot = card.querySelector('.driver-status');
+            const detail = card.querySelector('.driver-detail');
+            const meta = card.querySelector('.driver-meta');
+
+            // Update status
+            statusDot.classList.remove('idle');
+            statusDot.classList.add('online');
+            card.dataset.status = 'active';
+
+            // Update detail text
+            detail.classList.remove('idle-text');
+            detail.innerHTML = `
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                    <circle cx="12" cy="10" r="3"/>
+                </svg>
+                Picking up order...
+            `;
+
+            // Update meta
+            meta.innerHTML = `
+                <span class="delivery-eta">Assigned</span>
+                <button class="btn-icon-sm" onclick="viewDriverDetails('${driverId}')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9 18 15 12 9 6"/>
+                    </svg>
+                </button>
+            `;
+        }
+    });
+
+    setTimeout(() => {
+        showToast(`Driver ${driverId} is now on the way! 🚗`);
+    }, 1500);
+}
+
+// ============================================
 // Initialize
 // ============================================
 
