@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoiceCart - Order Using Voice or Chat</title>
+    <meta name="description"
+        content="A modern conversational commerce platform that lets you order using voice or chat.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo" onclick="showScreen('landing')">
+                <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" />
+                    <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+                    <line x1="12" x2="12" y1="19" y2="22" />
+                </svg>
+                <span>VoiceCart</span>
+            </a>
+            <div class="nav-links">
+                <a href="#" onclick="showScreen('landing')">Home</a>
+                <a href="#" onclick="showScreen('chat')">Order Now</a>
+                <a href="#" onclick="showScreen('dashboard')">Seller Dashboard</a>
+            </div>
+            <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+                <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5" />
+                    <line x1="12" y1="1" x2="12" y2="3" />
+                    <line x1="12" y1="21" x2="12" y2="23" />
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                    <line x1="1" y1="12" x2="3" y2="12" />
+                    <line x1="21" y1="12" x2="23" y2="12" />
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                </svg>
+                <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                </svg>
+            </button>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="3" x2="21" y1="6" y2="6" />
+                    <line x1="3" x2="21" y1="12" y2="12" />
+                    <line x1="3" x2="21" y1="18" y2="18" />
+                </svg>
+            </button>
+        </div>
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="#" onclick="showScreen('landing'); toggleMobileMenu()">Home</a>
+            <a href="#" onclick="showScreen('chat'); toggleMobileMenu()">Order Now</a>
+            <a href="#" onclick="showScreen('dashboard'); toggleMobileMenu()">Seller Dashboard</a>
+        </div>
+    </nav>
+
+    <!-- Landing Screen -->
+    <section id="landing" class="screen active">
+        <div class="hero">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                    </svg>
+                    <span>AI-Powered Ordering</span>
+                </div>
+                <h1>Order Using <span class="gradient-text">Voice</span> or <span class="gradient-text">Chat</span></h1>
+                <p class="hero-subtitle">Experience the future of shopping. Just speak or type what you need, and our AI
+                    will understand your order instantly. No more scrolling through endless menus.</p>
+                <div class="hero-cta">
+                    <button class="btn btn-primary" onclick="showScreen('chat')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" />
+                            <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+                            <line x1="12" x2="12" y1="19" y2="22" />
+                        </svg>
+                        Start Ordering
+                    </button>
+                    <button class="btn btn-secondary" onclick="showDemo()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="5 3 19 12 5 21 5 3" />
+                        </svg>
+                        View Demo
+                    </button>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="phone-mockup">
+                    <div class="phone-screen">
+                        <div class="demo-chat">
+                            <div class="demo-message system">
+                                <p>Hi! What would you like to order today?</p>
+                            </div>
+                            <div class="demo-message user">
+                                <p>I'd like 2 margherita pizzas and a coke</p>
+                            </div>
+                            <div class="demo-message system">
+                                <p>Got it! 2 Margherita Pizzas and 1 Coca-Cola. Your total is ₹850. Should I confirm?
+                                </p>
+                            </div>
+                            <div class="voice-wave">
+                                <span></span><span></span><span></span><span></span><span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" />
+                        <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+                    </svg>
+                </div>
+                <h3>Voice Ordering</h3>
+                <p>Just speak naturally. Our AI understands context, quantities, and preferences.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                    </svg>
+                </div>
+                <h3>Chat Interface</h3>
+                <p>Prefer typing? Chat with our assistant just like messaging a friend.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10" />
+                        <polyline points="12 6 12 12 16 14" />
+                    </svg>
+                </div>
+                <h3>Instant Processing</h3>
+                <p>Orders are processed in real-time. No delays, no confusion.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chat / Voice Order Interface -->
+    <section id="chat" class="screen">
+        <div class="chat-container">
+            <div class="chat-main">
+                <div class="chat-header">
+                    <div class="chat-header-info">
+                        <div class="avatar">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" />
+                                <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h2>VoiceCart Assistant</h2>
+                            <span class="status online">Online • Ready to help</span>
+                        </div>
+                    </div>
+                    <button class="btn-icon" onclick="toggleOrderPanel()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="9" cy="21" r="1" />
+                            <circle cx="20" cy="21" r="1" />
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                        </svg>
+                        <span class="cart-badge" id="cartBadge">3</span>
+                    </button>
+                </div>
+
+                <div class="chat-messages" id="chatMessages">
+                    <div class="message-date">Today</div>
+
+                    <div class="message system">
+                        <div class="message-avatar">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" />
+                                <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+                            </svg>
+                        </div>
+                        <div class="message-content">
+                            <p>Hi there! 👋 Welcome to VoiceCart. I'm here to help you place your order.</p>
+                            <p>You can type your order or tap the microphone to speak. What would you like today?</p>
+                            <span class="message-time">10:30 AM</span>
+                        </div>
+                    </div>
+
+                    <div class="message user">
+                        <div class="message-content">
+                            <p>I'd like to order 2 margherita pizzas, one large pepperoni, and 3 bottles of coke</p>
+                            <span class="message-time">10:31 AM</span>
+                        </div>
+                    </div>
+
+                    <div class="message system">
+                        <div class="message-avatar">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" />
+                                <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+                            </svg>
+                        </div>
+                        <div class="message-content">
+                            <p>Perfect! I've got your order:</p>
+                            <div class="order-preview">
+                                <div class="order-preview-item">
+                                    <span>2× Margherita Pizza (Medium)</span>
+                                    <span>₹600</span>
+                                </div>
+                                <div class="order-preview-item">
+                                    <span>1× Pepperoni Pizza (Large)</span>
+                                    <span>₹450</span>
+                                </div>
+                                <div class="order-preview-item">
+                                    <span>3× Coca-Cola (500ml)</span>
+                                    <span>₹150</span>
+                                </div>
+                                <div class="order-preview-total">
+                                    <span>Total</span>
+                                    <span>₹1,200</span>
+                                </div>
+                            </div>
+                            <p>Would you like to confirm this order?</p>
+                            <span class="message-time">10:31 AM</span>
+                        </div>
+                    </div>
+
+                    <div class="message user">
+                        <div class="message-content">
+                            <p>Yes, confirm it!</p>
+                            <span class="message-time">10:32 AM</span>
+                        </div>
+                    </div>
+
+                    <div class="message system">
+                        <div class="message-avatar">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" />
+                                <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+                            </svg>
+                        </div>
+                        <div class="message-content">
+                            <p>🎉 Order confirmed! Your order #VC2847 has been placed successfully.</p>
+                            <p>Estimated delivery time: 25-30 minutes. You can track your order in the summary panel.
+                            </p>
+                            <span class="message-time">10:32 AM</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="typing-indicator" id="typingIndicator">
+                    <div class="message-avatar small">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" />
+                            <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+                        </svg>
+                    </div>
+                    <div class="typing-dots">
+                        <span></span><span></span><span></span>
+                    </div>
+                </div>
+
+                <div class="chat-input-container">
+                    <div class="chat-input">
+                        <input type="text" id="messageInput" placeholder="Type your order..."
+                            onkeypress="handleKeyPress(event)">
+                        <button class="btn-icon mic-btn" id="micBtn" onclick="toggleMic()">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" />
+                                <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+                                <line x1="12" x2="12" y1="19" y2="22" />
+                            </svg>
+                            <div class="mic-waves">
+                                <span></span><span></span><span></span>
+                            </div>
+                        </button>
+                        <button class="btn-icon send-btn" onclick="sendMessage()">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="22" x2="11" y1="2" y2="13" />
+                                <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order Summary Panel -->
+            <div class="order-panel" id="orderPanel">
+                <div class="order-panel-header">
+                    <h3>Order Summary</h3>
+                    <span class="order-status draft">Draft</span>
+                </div>
+
+                <div class="order-items">
+                    <div class="order-item">
+                        <div class="order-item-info">
+                            <span class="order-item-name">Margherita Pizza</span>
+                            <span class="order-item-size">Medium</span>
+                        </div>
+                        <div class="order-item-qty">
+                            <button class="qty-btn" onclick="updateQty(this, -1)">−</button>
+                            <span>2</span>
+                            <button class="qty-btn" onclick="updateQty(this, 1)">+</button>
+                        </div>
+                        <span class="order-item-price">₹600</span>
+                    </div>
+
+                    <div class="order-item">
+                        <div class="order-item-info">
+                            <span class="order-item-name">Pepperoni Pizza</span>
+                            <span class="order-item-size">Large</span>
+                        </div>
+                        <div class="order-item-qty">
+                            <button class="qty-btn" onclick="updateQty(this, -1)">−</button>
+                            <span>1</span>
+                            <button class="qty-btn" onclick="updateQty(this, 1)">+</button>
+                        </div>
+                        <span class="order-item-price">₹450</span>
+                    </div>
+
+                    <div class="order-item">
+                        <div class="order-item-info">
+                            <span class="order-item-name">Coca-Cola</span>
+                            <span class="order-item-size">500ml</span>
+                        </div>
+                        <div class="order-item-qty">
+                            <button class="qty-btn" onclick="updateQty(this, -1)">−</button>
+                            <span>3</span>
+                            <button class="qty-btn" onclick="updateQty(this, 1)">+</button>
+                        </div>
+                        <span class="order-item-price">₹150</span>
+                    </div>
+                </div>
+
+                <div class="order-summary-totals">
+                    <div class="summary-row">
+                        <span>Subtotal</span>
+                        <span>₹1,200</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Delivery Fee</span>
+                        <span>₹40</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Taxes</span>
+                        <span>₹60</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Total</span>
+                        <span>₹1,300</span>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary btn-full" onclick="confirmOrder()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                    Confirm Order
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seller Dashboard -->
+    <section id="dashboard" class="screen">
+        <div class="dashboard-container">
+            <div class="dashboard-header">
+                <div>
+                    <h1>Seller Dashboard</h1>
+                    <p>Manage your incoming orders</p>
+                </div>
+                <div class="dashboard-stats">
+                    <div class="stat-card">
+                        <span class="stat-value">12</span>
+                        <span class="stat-label">Today's Orders</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-value">₹15,840</span>
+                        <span class="stat-label">Today's Revenue</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <!-- New Orders -->
+                <div class="dashboard-column">
+                    <div class="column-header new">
+                        <span class="column-indicator"></span>
+                        <h3>New Orders</h3>
+                        <span class="order-count">3</span>
+                    </div>
+
+                    <div class="order-cards">
+                        <div class="order-card new">
+                            <div class="order-card-header">
+                                <span class="order-id">#VC2847</span>
+                                <span class="order-time">2 min ago</span>
+                            </div>
+                            <div class="order-card-items">
+                                <div class="order-card-item">
+                                    <span class="item-qty">2×</span>
+                                    <span class="item-name">Margherita Pizza</span>
+                                </div>
+                                <div class="order-card-item">
+                                    <span class="item-qty">1×</span>
+                                    <span class="item-name">Pepperoni Pizza (L)</span>
+                                </div>
+                                <div class="order-card-item">
+                                    <span class="item-qty">3×</span>
+                                    <span class="item-name">Coca-Cola</span>
+                                </div>
+                            </div>
+                            <div class="order-card-footer">
+                                <span class="order-total">₹1,300</span>
+                                <div class="order-actions">
+                                    <button class="btn btn-reject" onclick="rejectOrder(this)">Reject</button>
+                                    <button class="btn btn-accept" onclick="acceptOrder(this)">Accept</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="order-card new">
+                            <div class="order-card-header">
+                                <span class="order-id">#VC2846</span>
+                                <span class="order-time">5 min ago</span>
+                            </div>
+                            <div class="order-card-items">
+                                <div class="order-card-item">
+                                    <span class="item-qty">1×</span>
+                                    <span class="item-name">Chicken Biryani</span>
+                                </div>
+                                <div class="order-card-item">
+                                    <span class="item-qty">2×</span>
+                                    <span class="item-name">Butter Naan</span>
+                                </div>
+                            </div>
+                            <div class="order-card-footer">
+                                <span class="order-total">₹420</span>
+                                <div class="order-actions">
+                                    <button class="btn btn-reject" onclick="rejectOrder(this)">Reject</button>
+                                    <button class="btn btn-accept" onclick="acceptOrder(this)">Accept</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="order-card new">
+                            <div class="order-card-header">
+                                <span class="order-id">#VC2845</span>
+                                <span class="order-time">8 min ago</span>
+                            </div>
+                            <div class="order-card-items">
+                                <div class="order-card-item">
+                                    <span class="item-qty">4×</span>
+                                    <span class="item-name">Veg Burger</span>
+                                </div>
+                                <div class="order-card-item">
+                                    <span class="item-qty">4×</span>
+                                    <span class="item-name">French Fries</span>
+                                </div>
+                                <div class="order-card-item">
+                                    <span class="item-qty">4×</span>
+                                    <span class="item-name">Vanilla Shake</span>
+                                </div>
+                            </div>
+                            <div class="order-card-footer">
+                                <span class="order-total">₹960</span>
+                                <div class="order-actions">
+                                    <button class="btn btn-reject" onclick="rejectOrder(this)">Reject</button>
+                                    <button class="btn btn-accept" onclick="acceptOrder(this)">Accept</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pending Orders -->
+                <div class="dashboard-column">
+                    <div class="column-header pending">
+                        <span class="column-indicator"></span>
+                        <h3>Pending</h3>
+                        <span class="order-count">2</span>
+                    </div>
+
+                    <div class="order-cards">
+                        <div class="order-card pending">
+                            <div class="order-card-header">
+                                <span class="order-id">#VC2844</span>
+                                <span class="order-time">15 min ago</span>
+                            </div>
+                            <div class="order-card-items">
+                                <div class="order-card-item">
+                                    <span class="item-qty">2×</span>
+                                    <span class="item-name">Paneer Tikka</span>
+                                </div>
+                                <div class="order-card-item">
+                                    <span class="item-qty">3×</span>
+                                    <span class="item-name">Garlic Naan</span>
+                                </div>
+                                <div class="order-card-item">
+                                    <span class="item-qty">1×</span>
+                                    <span class="item-name">Dal Makhani</span>
+                                </div>
+                            </div>
+                            <div class="order-card-footer">
+                                <span class="order-total">₹680</span>
+                                <div class="order-actions">
+                                    <button class="btn btn-complete" onclick="completeOrder(this)">Mark
+                                        Complete</button>
+                                </div>
+                            </div>
+                            <div class="order-progress">
+                                <div class="progress-bar" style="width: 60%"></div>
+                            </div>
+                        </div>
+
+                        <div class="order-card pending">
+                            <div class="order-card-header">
+                                <span class="order-id">#VC2843</span>
+                                <span class="order-time">22 min ago</span>
+                            </div>
+                            <div class="order-card-items">
+                                <div class="order-card-item">
+                                    <span class="item-qty">1×</span>
+                                    <span class="item-name">Veg Thali</span>
+                                </div>
+                                <div class="order-card-item">
+                                    <span class="item-qty">1×</span>
+                                    <span class="item-name">Sweet Lassi</span>
+                                </div>
+                            </div>
+                            <div class="order-card-footer">
+                                <span class="order-total">₹280</span>
+                                <div class="order-actions">
+                                    <button class="btn btn-complete" onclick="completeOrder(this)">Mark
+                                        Complete</button>
+                                </div>
+                            </div>
+                            <div class="order-progress">
+                                <div class="progress-bar" style="width: 85%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Completed Orders -->
+                <div class="dashboard-column">
+                    <div class="column-header completed">
+                        <span class="column-indicator"></span>
+                        <h3>Completed</h3>
+                        <span class="order-count">7</span>
+                    </div>
+
+                    <div class="order-cards">
+                        <div class="order-card completed">
+                            <div class="order-card-header">
+                                <span class="order-id">#VC2842</span>
+                                <span class="order-time">35 min ago</span>
+                            </div>
+                            <div class="order-card-items">
+                                <div class="order-card-item">
+                                    <span class="item-qty">3×</span>
+                                    <span class="item-name">Masala Dosa</span>
+                                </div>
+                                <div class="order-card-item">
+                                    <span class="item-qty">3×</span>
+                                    <span class="item-name">Filter Coffee</span>
+                                </div>
+                            </div>
+                            <div class="order-card-footer">
+                                <span class="order-total">₹390</span>
+                                <span class="completed-badge">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="20 6 9 17 4 12" />
+                                    </svg>
+                                    Delivered
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="order-card completed">
+                            <div class="order-card-header">
+                                <span class="order-id">#VC2841</span>
+                                <span class="order-time">48 min ago</span>
+                            </div>
+                            <div class="order-card-items">
+                                <div class="order-card-item">
+                                    <span class="item-qty">2×</span>
+                                    <span class="item-name">Pasta Alfredo</span>
+                                </div>
+                                <div class="order-card-item">
+                                    <span class="item-qty">2×</span>
+                                    <span class="item-name">Garlic Bread</span>
+                                </div>
+                            </div>
+                            <div class="order-card-footer">
+                                <span class="order-total">₹540</span>
+                                <span class="completed-badge">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="20 6 9 17 4 12" />
+                                    </svg>
+                                    Delivered
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="order-card completed">
+                            <div class="order-card-header">
+                                <span class="order-id">#VC2840</span>
+                                <span class="order-time">1 hr ago</span>
+                            </div>
+                            <div class="order-card-items">
+                                <div class="order-card-item">
+                                    <span class="item-qty">1×</span>
+                                    <span class="item-name">Family Combo</span>
+                                </div>
+                            </div>
+                            <div class="order-card-footer">
+                                <span class="order-total">₹1,499</span>
+                                <span class="completed-badge">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="20 6 9 17 4 12" />
+                                    </svg>
+                                    Delivered
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="20 6 9 17 4 12" />
+        </svg>
+        <span id="toastMessage">Action completed successfully!</span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
